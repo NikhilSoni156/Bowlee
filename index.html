@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+  body{
+    width: 100vw;
+    height: 100vh;
+    justify-content:center;
+    display: flex;
+     background-color:white
+  }
+  .container{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+  }
+    .timer {
+      font-size: 2em;
+    }
+    .button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 5px;
+    }
+    .button:disabled {
+      background-color: #cccccc;
+    }
+    .button-container {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div  class="container">
+<div class="timer" id="timer">10</div>
+<div class="button-container">
+  <button class="button" onclick="resetTimer()">Bid +1</button>
+  <button class="button" onclick="resetTimer()">Bid +3</button>
+  <button class="button" onclick="resetTimer()">Bid +5</button>
+  <button class="button" onclick="resetTimer()">Bid +10</button>
+</div></div>
+
+<script>
+  var timeLeft = 10;
+  var timerId;
+
+  function updateTimer() {
+    if (timeLeft <= 0) {
+      clearInterval(timerId);
+    } else {
+      document.getElementById("timer").innerHTML = timeLeft;
+      timeLeft--;
+    }
+  }
+
+  function startTimer() {
+    timeLeft = 10;
+    timerId = setInterval(updateTimer, 1000);
+  }
+
+  function resetTimer() {
+    clearInterval(timerId);
+    timeLeft = 10;
+    document.getElementById("timer").innerHTML = timeLeft;
+    timerId = setInterval(updateTimer, 1000);
+  }
+
+  // Start the timer when the page loads
+  window.onload = function() {
+    startTimer();
+  };
+</script>
+
+</body>
+</html>
